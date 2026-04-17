@@ -1,0 +1,27 @@
+{
+  "name": "distributed-werewolf",
+  "version": "1.0.0",
+  "description": "Distributed Mafia/Werewolf multiplayer mini project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["werewolf", "mafia", "multiplayer", "game", "socket.io", "express", "distributed", "nodejs"],
+  "author": "Siddhi Suryavanshi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siddhi3124/distributed-werewolf.git"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

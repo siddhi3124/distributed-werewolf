@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distributed Werewolf</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Distributed Mafia / Werewolf</h1>
+
+    <div id="joinSection" class="card">
+      <input id="nameInput" type="text" placeholder="Enter your name" />
+      <input id="roomInput" type="text" placeholder="Enter room code to join" />
+      <div class="row">
+        <button id="createBtn">Create Room</button>
+        <button id="joinBtn">Join Room</button>
+      </div>
+    </div>
+
+    <div id="roomSection" class="card hidden">
+      <h2>Room: <span id="roomCodeText"></span></h2>
+      <p>Phase: <span id="phaseText">lobby</span></p>
+      <p>Your role: <span id="roleText">Not assigned</span></p>
+      <p>Winner: <span id="winnerText">-</span></p>
+
+      <h3>Players</h3>
+      <ul id="playerList"></ul>
+
+      <button id="startBtn">Start Game</button>
+
+      <h3>Available Targets</h3>
+      <ul id="alivePlayersList"></ul>
+
+      <div class="row">
+        <select id="targetSelect"></select>
+        <button id="nightActionBtn">Submit Night Action</button>
+        <button id="dayVoteBtn">Submit Day Vote</button>
+      </div>
+
+      <h3>Logs</h3>
+      <div id="logsBox" class="logs"></div>
+
+      <div id="privateBox" class="private-box"></div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

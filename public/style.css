@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+input, select, button {
+  padding: 10px;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.logs {
+  background: #111;
+  color: #eee;
+  padding: 10px;
+  min-height: 120px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.private-box {
+  margin-top: 15px;
+  padding: 10px;
+  background: #eef5ff;
+  border-left: 4px solid #3b82f6;
+}
