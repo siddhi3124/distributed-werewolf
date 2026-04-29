@@ -14,8 +14,7 @@ function createRoom(hostPlayer, roomCode) {
     winner: null,
     nightActions: {
       mafiaVotes: {},
-      doctorSave: null,
-      detectiveInspect: null
+      doctorSave: null
     },
     votes: {}
   };

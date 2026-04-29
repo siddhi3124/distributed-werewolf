@@ -1,54 +1,124 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
   margin: 0;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
 }
 
 .card {
   background: white;
-  padding: 20px;
+  padding: 22px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
 }
 
 .hidden {
   display: none;
 }
 
+input,
+select {
+  width: 100%;
+  padding: 11px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
 .row {
   display: flex;
   gap: 10px;
   margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-input, select, button {
-  padding: 10px;
-  font-size: 14px;
 }
 
 button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
   cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+#startBtn {
+  width: 100%;
+  margin-top: 10px;
+  background: #16a34a;
+}
+
+#startBtn:hover {
+  background: #15803d;
+}
+
+#nightActionBtn {
+  background: #991b1b;
+}
+
+#nightActionBtn:hover {
+  background: #7f1d1d;
+}
+
+#dayVoteBtn {
+  background: #ca8a04;
+}
+
+#dayVoteBtn:hover {
+  background: #a16207;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
 }
 
 .logs {
-  background: #111;
-  color: #eee;
-  padding: 10px;
-  min-height: 120px;
-  border-radius: 8px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 12px;
+  border-radius: 6px;
+  height: 140px;
   overflow-y: auto;
+  font-size: 13px;
 }
 
-.private-box {
-  margin-top: 15px;
+.message {
+  background: #eef6ff;
+  border-left: 4px solid #2563eb;
   padding: 10px;
-  background: #eef5ff;
-  border-left: 4px solid #3b82f6;
+  margin-top: 12px;
+  border-radius: 4px;
+}
+
+.developers {
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+  margin-top: 18px;
 }

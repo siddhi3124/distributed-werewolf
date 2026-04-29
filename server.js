@@ -228,15 +228,6 @@ io.on("connection", (socket) => {
     if (allNightActionsSubmitted(room)) {
       const resolution = resolveNight(room);
 
-      if (resolution.detectiveResult) {
-        const detective = room.players.find(
-          (p) => p.role === ROLES.DETECTIVE && p.alive
-        );
-        if (detective) {
-          io.to(detective.socketId).emit("detectiveResult", resolution.detectiveResult);
-        }
-      }
-
       emitRoomUpdate(room.roomCode);
       emitAlivePlayers(room);
 

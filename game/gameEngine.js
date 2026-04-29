@@ -66,34 +66,32 @@ function submitNightAction(room, actorSocketId, targetSocketId) {
 
   if (actor.role === ROLES.MAFIA) {
     room.nightActions.mafiaVotes[actorSocketId] = targetSocketId;
-    return { ok: true, message: "Mafia vote submitted" };
+    return { ok: true, message: "Mafia action submitted. Waiting for other night actions." };
   }
 
   if (actor.role === ROLES.DOCTOR) {
     room.nightActions.doctorSave = targetSocketId;
-    return { ok: true, message: "Doctor save submitted" };
-  }
-
-  if (actor.role === ROLES.DETECTIVE) {
-    room.nightActions.detectiveInspect = targetSocketId;
-    return { ok: true, message: "Detective inspection submitted" };
+    return { ok: true, message: "Doctor save submitted. Waiting for other night actions." };
   }
 
   return { ok: false, message: "This role has no night action" };
 }
 
 function allNightActionsSubmitted(room) {
-  const aliveMafia = getAliveMafiaPlayers(room);
+  const aliveMafia = room.players.filter(
+    (p) => p.alive && p.role === ROLES.MAFIA
+  );
+
+  const aliveDoctor = room.players.find(
+    (p) => p.alive && p.role === ROLES.DOCTOR
+  );
+
   const mafiaVotesCount = Object.keys(room.nightActions.mafiaVotes).length;
 
-  const doctorAlive = room.players.some((p) => p.alive && p.role === ROLES.DOCTOR);
-  const detectiveAlive = room.players.some((p) => p.alive && p.role === ROLES.DETECTIVE);
-
   const mafiaDone = mafiaVotesCount >= aliveMafia.length;
-  const doctorDone = !doctorAlive || !!room.nightActions.doctorSave;
-  const detectiveDone = !detectiveAlive || !!room.nightActions.detectiveInspect;
+  const doctorDone = !aliveDoctor || !!room.nightActions.doctorSave;
 
-  return mafiaDone && doctorDone && detectiveDone;
+  return mafiaDone && doctorDone;
 }
 
 function getMajorityTarget(votesMap) {
@@ -128,13 +126,12 @@ function resolveNight(room) {
 
   const mafiaTargetId = getMajorityTarget(room.nightActions.mafiaVotes);
   const doctorSaveId = room.nightActions.doctorSave;
-  const detectiveInspectId = room.nightActions.detectiveInspect;
 
   let killedPlayer = null;
-  let detectiveResult = null;
 
   if (mafiaTargetId && mafiaTargetId !== doctorSaveId) {
     killedPlayer = findPlayerBySocketId(room, mafiaTargetId);
+
     if (killedPlayer) {
       killedPlayer.alive = false;
       room.logs.push(`${killedPlayer.name} was eliminated during the night.`);
@@ -143,18 +140,8 @@ function resolveNight(room) {
     room.logs.push("No one was eliminated during the night.");
   }
 
-  if (detectiveInspectId) {
-    const inspected = findPlayerBySocketId(room, detectiveInspectId);
-    if (inspected) {
-      detectiveResult = {
-        targetSocketId: inspected.socketId,
-        targetName: inspected.name,
-        role: inspected.role
-      };
-    }
-  }
-
   const winCheck = checkWinCondition(room);
+
   if (!winCheck.gameOver) {
     room.phase = PHASES.DAY;
     room.logs.push(`Day ${room.dayCount} begins.`);
@@ -164,7 +151,6 @@ function resolveNight(room) {
   return {
     ok: true,
     killedPlayer,
-    detectiveResult,
     gameOver: winCheck.gameOver,
     winner: room.winner || null
   };

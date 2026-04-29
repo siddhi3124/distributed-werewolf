@@ -1,7 +1,6 @@
 const ROLES = {
   MAFIA: "mafia",
   DOCTOR: "doctor",
-  DETECTIVE: "detective",
   VILLAGER: "villager"
 };
 
@@ -12,18 +11,27 @@ const PHASES = {
   ENDED: "ended"
 };
 
-const MIN_PLAYERS = 5;
+const MIN_PLAYERS = 4;
 
 function getRoleDistribution(playerCount) {
-  if (playerCount < 5) {
+  if (playerCount < 4) {
     throw new Error("Not enough players");
+  }
+
+  if (playerCount === 4) {
+    return [
+      ROLES.MAFIA,
+      ROLES.DOCTOR,
+      ROLES.VILLAGER,
+      ROLES.VILLAGER
+    ];
   }
 
   if (playerCount === 5) {
     return [
       ROLES.MAFIA,
       ROLES.DOCTOR,
-      ROLES.DETECTIVE,
+      ROLES.VILLAGER,
       ROLES.VILLAGER,
       ROLES.VILLAGER
     ];
@@ -34,18 +42,6 @@ function getRoleDistribution(playerCount) {
       ROLES.MAFIA,
       ROLES.MAFIA,
       ROLES.DOCTOR,
-      ROLES.DETECTIVE,
-      ROLES.VILLAGER,
-      ROLES.VILLAGER
-    ];
-  }
-
-  if (playerCount === 7) {
-    return [
-      ROLES.MAFIA,
-      ROLES.MAFIA,
-      ROLES.DOCTOR,
-      ROLES.DETECTIVE,
       ROLES.VILLAGER,
       ROLES.VILLAGER,
       ROLES.VILLAGER
@@ -56,8 +52,7 @@ function getRoleDistribution(playerCount) {
     ROLES.MAFIA,
     ROLES.MAFIA,
     ROLES.DOCTOR,
-    ROLES.DETECTIVE,
-    ...Array(playerCount - 4).fill(ROLES.VILLAGER)
+    ...Array(playerCount - 3).fill(ROLES.VILLAGER)
   ];
 }
 

@@ -49,8 +49,7 @@ function findPlayerBySocketId(room, socketId) {
 function resetNightActions(room) {
   room.nightActions = {
     mafiaVotes: {},
-    doctorSave: null,
-    detectiveInspect: null
+    doctorSave: null
   };
 }
 
